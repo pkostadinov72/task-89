@@ -9,7 +9,7 @@ export default class Application extends EventEmitter {
 
   constructor() {
     super();
-    this._loading = document.querySelector("#progress");
+    this._loading = document.querySelector(".progress");
     this.emit(Application.events.READY);
     this._load();
     this._loading.value = 0;
@@ -18,9 +18,10 @@ export default class Application extends EventEmitter {
     const res = await fetch("https://swapi.boom.dev/api/planets");
     const data = await res.json();
     this._loading.max = data.count;
-    for (let i = 0; i < 6; i++) {
+    for (let i = 1; i < 7; i++) {
       this._startLoading(i);
     }
+    this._stopLoading();
   }
   _create(planetName) {
     const box = document.createElement("div");
